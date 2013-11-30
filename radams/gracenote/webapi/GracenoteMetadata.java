@@ -41,6 +41,7 @@ public class GracenoteMetadata
             albumData.put("album_title",       this._getTextValue(e, "TITLE"));
             albumData.put("album_year",        this._getTextValue(e, "DATE"));
             albumData.put("genre",             this._getOETData(e, "GENRE"));
+            albumData.put("album_coverart",    this._getAttribElement(e, "URL", "TYPE", "COVERART"));
 
             // Artist metadata
             albumData.put("artist_image_url",  this._getAttribElement(e, "URL", "TYPE", "ARTIST_IMAGE"));
