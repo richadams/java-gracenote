@@ -47,6 +47,7 @@ The results are a GracenoteMetadata objext containing the metadata information,
          + OET id:29422, text:Male
          + OET id:29426, text:Male
        + track_number: 1
+       + album_coverart: http://web.content.cddbp.net/cds/2.0?id=2FC2D6DD64870A70&client=15071488&class=cover&origin=front&size=medium&type=image/jpeg&tag=02KsU06lSPoLEKmCtLC7oOSfMf1zXdygxsd.Cle0Wdvq2pCkNIEzHdqA
        + artist_era:
          + OET id:29484, text:1990's
        + artist_bio_url: https://web.content.cddbp.net/cgi-bin/content-thin?id=1274BA55D9C33B8E&client=8311808&class=biography&type=text/plain&tag=022AV-RNVbltMJc.EFJbGc5S2gIPLshDXUSUnGxxiCA5oNVzSIk88Iig
