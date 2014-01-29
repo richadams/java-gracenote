@@ -1,33 +1,35 @@
-#java-gracenote
+A simple Java client for the [Gracenote Web API](https://developer.gracenote.com/web-api), which allows you to look up artists, albums, and tracks in the Gracenote database, and returns a number of metadata fields, including:
 
-A simple Java client for the <a href="http://www.gracenote.com">Gracenote</a> Music API, which can retrieve Artist, Album and Track metadata with the most common options.
+* Basic metadata; e.g. Artist Name, Album Title, Track Title.
+* Descriptors; e.g. Genre, Origin, Mood, Tempo.
+* Related content; e.g. Album Art, Artist Image, Biographies.
 
-This is basically the Java equivilent to the <a href="https://github.com/cweichen/pygn">pygn</a> and <a href="https://github.com/richadams/php-gracenote">php-gracenote</a> projects.
+:exclamation: **_This is just example code to get you started on your own projects using Gracenote's API, and is not meant as an exhaustive wrapper of the full API._**
 
-java-gracenote allows you to look up artists, albums, and tracks in the Gracenote database, and returns a number of metadata fields, including:
+### Installation
 
-* Basic metadata like Artist Name, Album Title, Track Title.
-* Descriptors like Genre, Origin, Mood, Tempo.
-* Related content like Album Art, Artist Image, Biographies.
+Just copy the `radams` directory into your project, then import `radams.gracenote.webapi.GracenoteWebAPI` into it.
 
-##Installation
+### Prerequisites
 
-Just copy the `radams` directory into your project, then import the `radams.gracenote.webapi.GracenoteWebAPI` into your project.
-
-##Getting Started
-
-You will need a Gracenote Client ID to use this module. Please visit https://developer.gracenote.com to get yours.
+You will need a Gracenote Client ID from the [Gracenote Developer Portal](https://developer.gracenote.com/) to use the API.
 
 Each installed application also needs to have a User ID, which may be obtained by registering your Client ID with the Gracenote API. To do this, do:
 
     GracenoteWebAPI api = new GracenoteWebAPI(clientID, clientTag); // If you have a userID, you can specify it as the third parameter to constructor.
     String userID = api.register();
 
-This registration should be done only once per application to avoid hitting your API quota (i.e. definitely do NOT do this before every query). The userID can be stored in persistent storage (e.g. on the filesystem) and used for all subsequent pygn function calls.
+**This registration should be done only once per application to avoid hitting your API quota** (i.e. definitely do NOT do this before every query). The userID can be stored in persistent storage (e.g. on the filesystem) and used for all subsequent pygn function calls.
 
 Once you have your Client ID and User ID, you can start making queries.
 
-To search for the Moby track "Porcelin" from his album "Play",
+### Usage
+
+First, initialize the object using your credentials and UserID.
+
+    GracenoteWebAPI api = new GracenoteWebAPI(clientID, clientTag, userID);
+
+Then, to search for the Moby track "Porcelin" from his album "Play",
 
     GracenoteMetadata results = api.searchTrack("Moby", "Play", "Porcelin");
 
@@ -61,20 +63,20 @@ The results are a GracenoteMetadata objext containing the metadata information,
          + OET id:30199, text:New York
          + OET id:30634, text:New York City
 
-Note that URLs to related content (e.g. Album Art, Artist Image, etc) are not valid forever, so your application should download the content you want relatively soon after the lookup and cache it locally.
+_Note that URLs to related content (e.g. Album Art, Artist Image, etc) are not valid forever, so your application should download the content you want relatively soon after the lookup and cache it locally._
 
-If you don't know which album a track is on (or don't care which album version you get), you can simply leave that parameter blank:
+If you don't know which album a track is on (or don't care which album version you get), you can simply leave that parameter blank,
 
-	GracenoteMetadata results = api.searchTrack("Moby", "", "Porcelin");
+    GracenoteMetadata results = api.searchTrack("Moby", "", "Porcelin");
 
-There are also convenience functions to look up just an Artist or just an Album.
+There are also convenience functions to look up just an Artist...,
 
-	GracenoteMetadata results = api.searchArtist("CSS");
+    GracenoteMetadata results = api.searchArtist("CSS");
 
-will return the same result array with metadata for the top album by CSS (which happens to be "Cansei De Ser Sexy" at time of writing), with track-specific fields being blank
+(_This will return the same result array with metadata for the top album by CSS (which happens to be "Cansei De Ser Sexy" at time of writing), with track-specific fields being blank_)
 
-Calling:
+...or to look up just an Album,
 
-	GracenoteMetadata results = api.searchAlbum("Jaga Jazzist", "What We Must");
+    GracenoteMetadata results = api.searchAlbum("Jaga Jazzist", "What We Must");
 
-will return a array with metadata for Jaga Jazzist's "What We Must" album, again with track-specific fields empty.
+(_This will return a array with metadata for Jaga Jazzist's "What We Must" album, again with track-specific fields empty._)
