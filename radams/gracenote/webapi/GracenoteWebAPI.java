@@ -143,18 +143,21 @@ public class GracenoteWebAPI
             connection.setInstanceFollowRedirects(false);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "text/plain");
-            connection.setRequestProperty("charset", "utf-8");
+            connection.setRequestProperty("Charset", "utf-8");
             connection.setRequestProperty("Content-Length", "" + Integer.toString(data.getBytes().length));
             connection.setUseCaches (false);
 
             // Write the POST data
-            DataOutputStream wr = new DataOutputStream(connection.getOutputStream ());
-            wr.writeBytes(data);
-            wr.flush(); wr.close();
+			BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(
+					connection.getOutputStream(), "UTF-8"));
+			wr.write(data);
+			wr.flush();
+			wr.close();
 
-            // Read the output
-            StringBuffer output = new StringBuffer();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			// Read the output
+			StringBuffer output = new StringBuffer();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					connection.getInputStream(), "UTF-8"));
 
             String line;
             while ((line = reader.readLine()) != null) { output.append(line); }
