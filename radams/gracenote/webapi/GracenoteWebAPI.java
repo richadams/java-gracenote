@@ -144,7 +144,7 @@ public class GracenoteWebAPI
             connection.setInstanceFollowRedirects(false);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "text/plain");
-            connection.setRequestProperty("charset", "utf-8");
+            connection.setRequestProperty("Charset", "utf-8");
             connection.setRequestProperty("Content-Length", "" + Integer.toString(data.getBytes().length));
             connection.setUseCaches (false);
 
